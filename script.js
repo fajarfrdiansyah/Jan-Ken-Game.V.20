@@ -31,7 +31,7 @@ kertas.addEventListener("click" , () => {
     janken(2);
 });
 
-function (jariKen){
+function janken(jariKen){
     let jariKen = Math.floor(Math.random() * 3);
 
     switch (jariKen) {
