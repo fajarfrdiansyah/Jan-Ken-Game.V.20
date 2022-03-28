@@ -14,6 +14,16 @@ let gunting = document.getElementById("gunting");
 let batu = document.getElementById("batu");
 let kertas = document.getElementById("kertas");
 
+if (localStorage.getItem("skorKen")) {
+    skorKen = localStorage.getItem("skorKen");
+    displaySkorKen.innerHTML = skorKen;
+}
+
+if (localStorage.getItem("skorPlayer")) {
+    skorPlayer = localStorage.getItem("skorPlayer");
+    displaySkorPlayer.innerHTML = skorPlayer;
+}
+
 startGame.addEventListener("click", ()=> {
     splashScreen.style.top = "-120vh";
     splashScreen.style.transition = ".75s";
@@ -29,6 +39,16 @@ gunting.addEventListener("click" , () => {
 
 kertas.addEventListener("click" , () => {
     janken(2);
+});
+
+reset.addEventListener("click", () => {
+    if (confirm("Ini akan memulai ulang permainan, Anda yakin>")) {
+        skorKen = 0;
+        skorPlayer = 0;
+        displaySkorKen.innerHTML = skorKen;
+        displaySkorPlayer.innerHTML = skorPlayer;
+        localStorage.clear();
+    };
 });
 
 function janken(jariKen){
@@ -85,11 +105,13 @@ function result(who) {
     switch(who) {
         case "ken":
             skorKen++;
+            localStorage.setItem("skorKen", skorKen);
             displaySkorKen.innerHTML = skorKen;
             console.log("Ninja Ken Menang");
             break;
         case "player":
             skorPlayer++;
+            localStorage.setItem("skorPlayer", skorPlayer);
             displaySkorPlayer.innerHTML = skorPlayer;
             console.log("Anda Menang");
             break;
